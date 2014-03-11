@@ -14,7 +14,7 @@ defmodule Kernel.CLI do
     { config, argv } = process_argv(argv, Kernel.CLI.Config.new)
     System.argv(argv)
 
-    run fn ->
+    fun = fn ->
       command_results = Enum.map(Enum.reverse(config.commands), &process_command(&1, config))
       command_errors  = lc { :error, msg } inlist command_results, do: msg
       errors          = Enum.reverse(config.errors) ++ command_errors
@@ -23,7 +23,9 @@ defmodule Kernel.CLI do
         Enum.each(errors, &IO.puts(:stderr, &1))
         System.halt(1)
       end
-    end, config.halt
+    end
+
+    spawn(__MODULE__, :run, [fun, config.halt])
   end
 
   @doc """

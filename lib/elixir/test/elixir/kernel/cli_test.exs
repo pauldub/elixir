@@ -45,7 +45,7 @@ defmodule Kernel.CLI.TrapExitTest do
   
   test "it loads process with trap_exit set to false" do
     assert elixir(fixture_path("trap_exit.exs") |> to_char_list) == 
-      :ok
+      []
   end
 end
 
