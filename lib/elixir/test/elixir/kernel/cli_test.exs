@@ -40,6 +40,15 @@ defmodule Kernel.CLI.AtExitTest do
   end
 end
 
+defmodule Kernel.CLI.TrapExitTest do
+  use ExUnit.Case, async: true
+  
+  test "it loads process with trap_exit set to false" do
+    assert elixir(fixture_path("trap_exit.exs") |> to_char_list) == 
+      :ok
+  end
+end
+
 defmodule Kernel.CLI.ErrorTest do
   use ExUnit.Case, async: true
 
