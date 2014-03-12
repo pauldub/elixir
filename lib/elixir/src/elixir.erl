@@ -36,13 +36,13 @@ config_change(_Changed, _New, _Remove) ->
 
 main(Args) ->
   application:start(?MODULE),
-  'Elixir.Kernel.CLI':main(Args).
+  spawn('Elixir.Kernel.CLI', main, [Args]).
 
 %% Boot and process given options. Invoked by Elixir's script.
 
 start_cli() ->
   application:start(?MODULE),
-  'Elixir.Kernel.CLI':main(init:get_plain_arguments()).
+  spawn('Elixir.Kernel.CLI', main, [init:get_plain_arguments()]).
 
 %% EVAL HOOKS
 

@@ -25,7 +25,7 @@ defmodule Kernel.CLI do
       end
     end
 
-    spawn(__MODULE__, :run, [fun, config.halt])
+    run(fun, config.halt)
   end
 
   @doc """
